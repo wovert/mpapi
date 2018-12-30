@@ -105,6 +105,27 @@ URL 路径格式：http://server/index.php?s=module/controller/action/[param/val
 
 PATH_INFO 不支持的时候可以设置兼容模式
 
+### 路由模式
+
+- path_info模式：mpapi.com/sample/test/hello
+- 路由模式：mpapi.com/hello
+
+**使用路由模式之后PATH_INFO模式不能访问**
+
+- 强制使用路由模式：
+  - 'url_route_on'           => true, // 默认混合模式
+  - 'url_route_on'           => false, // path_info模式
+  - 'url_route_must'         => false, // 是否强制使用路由，默认
+  - 'url_route_must'         => true, // 强制使用路由
+
+`Route::rule('路由表达式', '路由地址', '请求类型', '路由参数(数组)', '变量规则(数组)');`
+
+- 
+
+### 混合模式
+
+- PATH_INFO或路由模式，但对于同一中URL访问，只能使用其中一个。
+
 ## 模块
 
 ### 新建模块
