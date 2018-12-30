@@ -124,3 +124,14 @@ PATH_INFO 不支持的时候可以设置兼容模式
 - Settings
   - Directories
   - 选择application目录和Sources，点击右边的生成的 application 弹出输入 Package prefix, 输入 app
+
+### 配置虚拟域名简化URL路径
+
+http://localhost 默认去找 httpd.conf(ServerName localhost:80)文件中的 DocumentRoot配置路径
+
+解决方法：localhost设置成虚拟主机配置
+
+## 路由
+
+
+
