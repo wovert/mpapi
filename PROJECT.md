@@ -152,7 +152,70 @@ http://localhost 默认去找 httpd.conf(ServerName localhost:80)文件中的 Do
 
 解决方法：localhost设置成虚拟主机配置
 
-## 路由
+## validate
+
+- 验证器
+  - 验证进行了封装
+- 独立验证
+
+### 验证器
+
+``` php
+use think\Validate;
+$data = [
+    'name' => 'wovert',
+    'email' => 'wovert@qq.com'
+];
+
+$validate = new Validate([
+    'name' => 'require|max:10',
+    'email'=> 'email'
+]);
+
+// 执行验证
+$result = $validate->check($data);
+// 仅返回第一个字段错误的验证错误信息
+echo $validate->getError();
 
 
+-------------------------------------
 
+$validate = new Validate([
+    'name' => 'require|max:10',
+    'email'=> 'email'
+]);
+
+// 执行验证
+$result = $validate->batch()->check($data);
+
+// Array ( [name] => name长度不能超过 10 [email] => email格式不符 )
+print_r($validate->getError());
+
+```
+
+**自定义验证器**
+
+``` php
+namespace app\api\validate;
+use think\Validate;
+
+class TestValidate extends Validate
+{
+  protected $rule = [
+    'name' => 'require|max:10',
+    'email' => 'wovert@qq'
+  ];  
+}
+
+
+//-----------------------------------
+
+namespace app\api\controller\v1;
+use app\api\validate\TestValidate;
+
+$validate = new TestValidate();
+$result = $validate->batch()->check($data);
+var_dump($validate->getError());
+```
+
+### 独立验证
